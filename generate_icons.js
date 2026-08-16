@@ -1,0 +1,50 @@
+const fs = require('fs');
+const path = require('path');
+
+// SVG string for Nexa Messenger logo (Glowing N with spark/lightning)
+function generateSVG(size) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="nexaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)"/>
+  <rect width="504" height="504" x="4" y="4" rx="116" fill="none" stroke="url(#nexaGrad)" stroke-width="6" opacity="0.4"/>
+
+  <!-- Background Glow Orb -->
+  <circle cx="256" cy="256" r="140" fill="#6366f1" opacity="0.25" filter="url(#glow)"/>
+
+  <!-- Logo Icon: Futuristic 'N' with chat bubble accents -->
+  <g filter="url(#glow)">
+    <!-- Main N Diagonal Path -->
+    <path d="M 156 128 L 156 384 L 216 384 L 300 236 L 300 384 L 356 384 L 356 128 L 296 128 L 212 276 L 212 128 Z" fill="url(#nexaGrad)"/>
+    <!-- Glowing Spark Dot -->
+    <circle cx="356" cy="128" r="28" fill="url(#accentGrad)"/>
+    <!-- Chat Wave Ring -->
+    <path d="M 120 256 C 120 180 180 120 256 120 C 332 120 392 180 392 256 C 392 332 332 392 256 392" fill="none" stroke="url(#accentGrad)" stroke-width="12" stroke-linecap="round" opacity="0.35"/>
+  </g>
+</svg>`;
+}
+
+const svgContent = generateSVG(512);
+fs.writeFileSync(path.join(__dirname, 'icon.svg'), svgContent);
+
+console.log('SVG icon generated successfully.');

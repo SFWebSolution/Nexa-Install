@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nexa Messenger | Install on Your Device</title>
+  <meta name="description" content="Install Nexa Messenger directly on your Android, iPhone, or Desktop device in 1 tap.">
+  
+  <!-- PWA & Mobile Icons -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Nexa">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Install Nexa Messenger">
+  <meta property="og:description" content="Install Nexa Messenger directly on your Android or iPhone device.">
+  <meta property="og:image" content="icon-512.png">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Light Effects -->
+  <div class="ambient-blur-1"></div>
+  <div class="ambient-blur-2"></div>
+
+  <div class="app-container">
+
+    <!-- Header Navigation -->
+    <header class="header">
+      <a href="https://nexa-qydr.onrender.com" class="brand" target="_blank" rel="noopener">
+        <img src="icon-192.png" alt="Nexa Icon" class="logo-img">
+        <span class="brand-text">NEXA</span>
+      </a>
+      <div class="device-badge" id="deviceBadge">
+        <span class="pulse-dot"></span>
+        <span id="deviceBadgeText">Detecting device...</span>
+      </div>
+    </header>
+
+    <!-- Hero Section with Official Nexa Icon -->
+    <section class="hero">
+      <div class="hero-icon-wrapper">
+        <img src="icon-512.png" alt="Nexa Messenger Logo" class="hero-app-icon">
+      </div>
+      <h1 class="hero-title">
+        Install <span>Nexa Messenger</span>
+      </h1>
+      <p class="hero-subtitle">
+        Install on your device in one tap.
+      </p>
+    </section>
+
+    <!-- Installer Action Card -->
+    <main class="installer-card">
+      <div class="install-status-box">
+        <img src="icon-192.png" class="mini-status-icon" alt="Nexa Icon">
+        <div class="status-info">
+          <h3 id="statusHeading">Install on your device</h3>
+          <p id="statusSubtext">Tap below to install Nexa directly.</p>
+        </div>
+      </div>
+
+      <button class="btn-primary-install" id="primaryInstallBtn">
+        <span class="btn-icon">⚡</span>
+        <span id="primaryInstallText">Install Nexa App</span>
+      </button>
+
+      <div class="install-note">
+        <span>🔒 Fast & verified for your device</span>
+      </div>
+    </main>
+
+    <!-- Platform Options -->
+    <section>
+      <h2 class="section-title">Choose Your Device</h2>
+      <div class="options-grid">
+        
+        <!-- Android Option -->
+        <div class="option-card">
+          <div>
+            <div class="option-header">
+              <div class="option-icon-box">
+                <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
+                <span class="os-badge">🤖</span>
+              </div>
+              <div>
+                <h3 class="option-title">Android App</h3>
+                <span class="option-subtitle">For Android Devices</span>
+              </div>
+            </div>
+            <p class="option-desc">
+              Download and install the Nexa app directly on your Android phone.
+            </p>
+          </div>
+          <button class="btn-secondary" id="downloadApkBtn">
+            <span>📥 Download Android APK</span>
+          </button>
+        </div>
+
+        <!-- iOS Option -->
+        <div class="option-card">
+          <div>
+            <div class="option-header">
+              <div class="option-icon-box">
+                <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
+                <span class="os-badge">🍎</span>
+              </div>
+              <div>
+                <h3 class="option-title">iPhone & iPad</h3>
+                <span class="option-subtitle">For iOS Devices</span>
+              </div>
+            </div>
+            <p class="option-desc">
+              Add Nexa directly to your iPhone Home Screen in 1 tap.
+            </p>
+          </div>
+          <button class="btn-secondary" id="installIosBtn">
+            <span>📱 Install on iPhone</span>
+          </button>
+        </div>
+
+        <!-- Web App Standalone Option -->
+        <div class="option-card">
+          <div>
+            <div class="option-header">
+              <div class="option-icon-box">
+                <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
+                <span class="os-badge">💻</span>
+              </div>
+              <div>
+                <h3 class="option-title">Web Application</h3>
+                <span class="option-subtitle">All Browsers & PC</span>
+              </div>
+            </div>
+            <p class="option-desc">
+              Open Nexa immediately in your browser in full app view.
+            </p>
+          </div>
+          <button class="btn-secondary" id="openInFrameBtn">
+            <span>🌐 Open Web App</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Nexa Features Grid -->
+    <section class="features-section">
+      <h2 class="section-title">What You Get with Nexa</h2>
+      <div class="features-grid">
+
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-text">
+            <h4>Real-Time Messaging</h4>
+            <p>Instant message delivery with typing indicators and read receipts.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🎙️</div>
+          <div class="feature-text">
+            <h4>Multi-User Voice Rooms</h4>
+            <p>Studio-quality audio voice rooms and group calls.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">✨</div>
+          <div class="feature-text">
+            <h4>AI-Powered Assistant</h4>
+            <p>Built-in AI assistance for translation, chat summaries, and smart help.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">📞</div>
+          <div class="feature-text">
+            <h4>HD Calling & Audio</h4>
+            <p>Crystal-clear voice notes and high-definition calling.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">📁</div>
+          <div class="feature-text">
+            <h4>File & Media Sharing</h4>
+            <p>Send photos, HD videos, audio notes, and files instantly.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🔐</div>
+          <div class="feature-text">
+            <h4>Secure & Private</h4>
+            <p>Modern security and privacy protection for all your chats.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Nexa Messenger. All rights reserved.</p>
+      <p><a href="https://nexa-qydr.onrender.com" target="_blank" style="color: var(--primary-cyan); text-decoration: none;">nexa-qydr.onrender.com</a></p>
+    </footer>
+
+  </div>
+
+  <!-- Embedded Web App Modal -->
+  <div class="web-app-frame-modal" id="webAppFrameModal">
+    <div class="frame-bar">
+      <div class="frame-title">
+        <img src="icon-192.png" width="24" height="24" style="border-radius: 6px;" alt="Logo">
+        <span>Nexa Messenger App</span>
+      </div>
+      <button class="btn-close-frame" id="closeFrameBtn">✕ Close</button>
+    </div>
+    <iframe src="https://nexa-qydr.onrender.com" class="app-iframe" title="Nexa Messenger App"></iframe>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

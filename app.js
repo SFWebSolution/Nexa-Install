@@ -220,14 +220,34 @@ function handlePrimaryInstallClick() {
     return;
   }
 
-  // If on Android without deferredPrompt yet (e.g. in-app browser or waiting for prompt)
+  // If on Android: Automatically download and trigger APK installation directly!
   if (userDevice.isAndroid) {
-    showAndroidInstallGuide();
+    triggerDirectApkDownload();
     return;
   }
 
   // Fallback for desktop / standard browsers
   showGeneralInstallGuide();
+}
+
+// Automatic Direct APK Download for Android Devices
+function triggerDirectApkDownload() {
+  const apkUrl = 'https://github.com/SFWebSolution/nexa-andriod/releases/download/latest/Nexa-Messenger.apk';
+  showToast('📥 Starting automatic app download...');
+  
+  const link = document.createElement('a');
+  link.href = apkUrl;
+  link.setAttribute('download', 'Nexa-Messenger.apk');
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  const primaryBtnText = document.getElementById('primaryInstallText');
+  if (primaryBtnText) {
+    primaryBtnText.innerText = '✅ Downloading App... Tap to Install';
+  }
 }
 
 // iOS Guide Modal
@@ -247,30 +267,6 @@ function showIOSInstallGuide() {
       </ol>
       <p style="margin-top: 14px; color: #a5b4fc; font-size: 0.85rem;">
         ✨ Nexa will appear instantly on your iPhone Home Screen with zero browser controls!
-      </p>
-    `;
-  }
-
-  if (modal) modal.classList.add('active');
-}
-
-// Android Guide Modal
-function showAndroidInstallGuide() {
-  const modal = document.getElementById('installGuideModal');
-  const title = document.getElementById('guideModalTitle');
-  const content = document.getElementById('guideModalContent');
-
-  if (title) title.innerText = '🤖 Install on Android';
-  if (content) {
-    content.innerHTML = `
-      <p style="margin-bottom: 12px;">To install Nexa without browser bars:</p>
-      <ol style="margin-left: 20px; line-height: 2;">
-        <li>Tap the <strong>menu icon</strong> ( <strong>⋮</strong> 3 vertical dots ) at the top right of Chrome.</li>
-        <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
-        <li>Tap <strong>Install</strong>.</li>
-      </ol>
-      <p style="margin-top: 14px; color: #a5b4fc; font-size: 0.85rem;">
-        💡 Or use the <strong>Download Android APK</strong> button on the main page for the direct native app!
       </p>
     `;
   }

@@ -37,13 +37,14 @@ function initDeviceDetection() {
   userDevice.isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
   userDevice.isDesktop = !userDevice.isAndroid && !userDevice.isIOS;
   userDevice.isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                            window.navigator.standalone === true ||
+                            window.matchMedia('(display-mode: fullscreen)').matches ||
+                            window.navigator.standalone === true || 
                             window.location.search.includes('source=pwa') ||
                             window.location.search.includes('mode=standalone');
 
-  // If launched in standalone / installed app mode, instantly navigate to the app
+  // If launched in standalone / installed app mode, launch native fullscreen frame
   if (userDevice.isStandalone) {
-    window.location.replace(NEXA_LIVE_URL);
+    launchStandaloneApp();
     return;
   }
 
@@ -63,7 +64,42 @@ function initDeviceDetection() {
   updateUIForDetectedDevice();
 }
 
-// 2. Update UI based on Detected Phone/Device
+// 2. Launch Standalone Native Fullscreen App (No Browser Bar)
+function launchStandaloneApp() {
+  document.documentElement.classList.add('is-standalone-app');
+  const frameContainer = document.getElementById('appFrameContainer');
+  const iframe = document.getElementById('nexaAppFrame');
+  const splash = document.getElementById('standaloneSplash');
+
+  if (frameContainer) frameContainer.style.display = 'block';
+  
+  if (iframe) {
+    if (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('onrender.com') === -1) {
+      iframe.src = NEXA_LIVE_URL;
+    }
+
+    let splashHidden = false;
+    const hideSplash = () => {
+      if (splashHidden) return;
+      splashHidden = true;
+      if (splash) {
+        splash.classList.add('fade-out');
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 450);
+      }
+    };
+
+    iframe.onload = () => {
+      setTimeout(hideSplash, 200);
+    };
+
+    // Fast fallback: fade out splash after 1.5 seconds max
+    setTimeout(hideSplash, 1500);
+  }
+}
+
+// 3. Update UI based on Detected Phone/Device
 function updateUIForDetectedDevice() {
   const badgeText = document.getElementById('deviceBadgeText');
   const primaryBtnText = document.getElementById('primaryInstallText');
@@ -71,7 +107,7 @@ function updateUIForDetectedDevice() {
   const statusSubtext = document.getElementById('statusSubtext');
 
   if (userDevice.isStandalone) {
-    window.location.replace(NEXA_LIVE_URL);
+    launchStandaloneApp();
     return;
   }
 
@@ -93,7 +129,7 @@ function updateUIForDetectedDevice() {
   }
 }
 
-// 3. Register PWA Service Worker for Offline Speed and Caching
+// 4. Register PWA Service Worker for Offline Speed and Caching
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
@@ -102,7 +138,7 @@ function registerServiceWorker() {
   }
 }
 
-// 4. Capture native beforeinstallprompt (Android & Desktop)
+// 5. Capture native beforeinstallprompt (Android & Desktop)
 function initPWAInstallPrompt() {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -112,14 +148,17 @@ function initPWAInstallPrompt() {
 
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
-    updateUIForDetectedDevice();
     showToast('🎉 Nexa Messenger installed successfully!');
+    setTimeout(() => {
+      launchStandaloneApp();
+    }, 800);
   });
 }
 
-// 5. Bind UI Events
+// 6. Bind UI Events
 function bindUIEvents() {
   const primaryBtn = document.getElementById('primaryInstallBtn');
+  const directLaunchBtn = document.getElementById('directLaunchBtn');
   const closeGuideBtn = document.getElementById('closeGuideBtn');
   const guideActionBtn = document.getElementById('guideActionBtn');
 
@@ -127,6 +166,13 @@ function bindUIEvents() {
     primaryBtn.addEventListener('click', (e) => {
       e.preventDefault();
       handlePrimaryInstallClick();
+    });
+  }
+
+  if (directLaunchBtn) {
+    directLaunchBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      launchStandaloneApp();
     });
   }
 
@@ -138,15 +184,15 @@ function bindUIEvents() {
 
   if (guideActionBtn) {
     guideActionBtn.addEventListener('click', () => {
-      window.location.href = 'https://nexa-qydr.onrender.com';
+      launchStandaloneApp();
     });
   }
 }
 
-// 6. Master 1-Tap Automatic Installation Engine
+// 7. Master 1-Tap Automatic Installation Engine
 function handlePrimaryInstallClick() {
   if (userDevice.isStandalone) {
-    window.location.href = 'https://nexa-qydr.onrender.com';
+    launchStandaloneApp();
     return;
   }
 

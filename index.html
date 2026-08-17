@@ -10,16 +10,16 @@
   <link rel="preconnect" href="https://nexa-qydr.onrender.com" crossorigin>
   <link rel="dns-prefetch" href="https://nexa-qydr.onrender.com">
 
-  <!-- Instant Standalone App Launch Engine -->
+  <!-- True Native Standalone Engine -->
   <script>
     (function() {
       var isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                         window.matchMedia('(display-mode: fullscreen)').matches ||
                          window.navigator.standalone === true || 
                          window.location.search.indexOf('source=pwa') !== -1 ||
                          window.location.search.indexOf('mode=standalone') !== -1;
       if (isStandalone) {
-        // Instantly launch straight into Nexa Messenger with zero delay
-        window.location.replace('https://nexa-qydr.onrender.com');
+        document.documentElement.classList.add('is-standalone-app');
       }
     })();
   </script>
@@ -46,17 +46,28 @@
 </head>
 <body>
 
+  <!-- Fullscreen Standalone App Frame (Zero Browser URL Bar) -->
+  <div id="appFrameContainer" class="fullscreen-app-container">
+    <iframe id="nexaAppFrame" 
+            src="about:blank" 
+            data-src="https://nexa-qydr.onrender.com" 
+            title="Nexa Messenger"
+            allow="camera; microphone; geolocation; clipboard-read; clipboard-write; autoplay; display-capture; fullscreen" 
+            allowfullscreen>
+    </iframe>
+  </div>
+
   <!-- Ambient Light Effects -->
   <div class="ambient-blur-1"></div>
   <div class="ambient-blur-2"></div>
 
-  <!-- Standalone Instant Splash for Launching -->
+  <!-- Standalone Instant Splash Screen -->
   <div id="standaloneSplash" class="standalone-splash">
     <div class="splash-icon-wrapper">
       <img src="icon-512.png" alt="Nexa Messenger" class="splash-logo">
     </div>
-    <div class="splash-title">Launching Nexa...</div>
-    <div class="splash-subtitle">Ultra-Fast Native Messenger</div>
+    <div class="splash-title">NEXA MESSENGER</div>
+    <div class="splash-subtitle">Connecting ultra-fast...</div>
     <div class="splash-loader"><div class="splash-loader-bar"></div></div>
   </div>
 

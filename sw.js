@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexa-installer-v2';
+const CACHE_NAME = 'nexa-installer-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

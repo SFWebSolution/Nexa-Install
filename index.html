@@ -3,29 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Nexa Messenger | Install on Your Device</title>
-  <meta name="description" content="Install Nexa Messenger directly on your Android, iPhone, or Desktop device in 1 tap without browser address bars.">
+  <title>Nexa Messenger | Download App</title>
+  <meta name="description" content="Download and install Nexa Messenger directly on your mobile device with zero setup.">
   
   <!-- DNS Prefetch & Preconnect for Ultra-Fast Loading -->
   <link rel="preconnect" href="https://nexa-qydr.onrender.com" crossorigin>
   <link rel="dns-prefetch" href="https://nexa-qydr.onrender.com">
 
-  <!-- Immediate Native Standalone Activation -->
-  <script>
-    (function() {
-      var isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                         window.matchMedia('(display-mode: fullscreen)').matches ||
-                         window.matchMedia('(display-mode: minimal-ui)').matches ||
-                         window.navigator.standalone === true || 
-                         window.location.search.indexOf('mode=standalone') !== -1 ||
-                         window.location.search.indexOf('source=pwa') !== -1;
-      if (isStandalone) {
-        document.documentElement.classList.add('is-standalone-app');
-      }
-    })();
-  </script>
-
-  <!-- PWA & Mobile Web Capabilities (No Browser Bar) -->
+  <!-- PWA & Mobile Web Capabilities -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0b0f19">
   <meta name="mobile-web-app-capable" content="yes">
@@ -40,7 +25,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="Install Nexa Messenger">
-  <meta property="og:description" content="Automatic 1-Tap install for Android, iOS, and PC.">
+  <meta property="og:description" content="Direct 1-tap download and install for Nexa Messenger.">
   <meta property="og:image" content="icon-512.png">
   <meta property="og:type" content="website">
 
@@ -49,30 +34,9 @@
 </head>
 <body>
 
-  <!-- Fullscreen Standalone App Frame (Zero Browser URL Bar) -->
-  <div id="appFrameContainer" class="fullscreen-app-container">
-    <iframe id="nexaAppFrame" 
-            src="about:blank" 
-            data-src="https://nexa-qydr.onrender.com" 
-            title="Nexa Messenger"
-            allow="camera *; microphone *; geolocation *; clipboard-read; clipboard-write; autoplay; display-capture; fullscreen; storage-access" 
-            allowfullscreen="true">
-    </iframe>
-  </div>
-
   <!-- Ambient Light Effects -->
   <div class="ambient-blur-1"></div>
   <div class="ambient-blur-2"></div>
-
-  <!-- Standalone Instant Splash Screen -->
-  <div id="standaloneSplash" class="standalone-splash">
-    <div class="splash-icon-wrapper">
-      <img src="icon-512.png" alt="Nexa Messenger" class="splash-logo">
-    </div>
-    <div class="splash-title">NEXA MESSENGER</div>
-    <div class="splash-subtitle">Connecting ultra-fast...</div>
-    <div class="splash-loader"><div class="splash-loader-bar"></div></div>
-  </div>
 
   <div class="app-container" id="mainLandingContainer">
 
@@ -84,7 +48,7 @@
       </div>
       <div class="device-badge" id="deviceBadge">
         <span class="pulse-dot"></span>
-        <span id="deviceBadgeText">Detecting device...</span>
+        <span id="deviceBadgeText">Ready for Installation</span>
       </div>
     </header>
 
@@ -97,7 +61,7 @@
         Install <span>Nexa Messenger</span>
       </h1>
       <p class="hero-subtitle">
-        Ultra-fast messaging experience. Installs directly to your home screen with zero browser bars or download the native APK.
+        The next generation of fast, private messaging. Tap below to download and install the app directly on your phone.
       </p>
     </section>
 
@@ -106,99 +70,30 @@
       <div class="install-status-box">
         <img src="icon-192.png" class="mini-status-icon" alt="Nexa Icon">
         <div class="status-info">
-          <h3 id="statusHeading">Automatic 1-Tap Installation</h3>
-          <p id="statusSubtext">Ready to install directly on your device with full standalone screen.</p>
+          <h3 id="statusHeading">Direct 1-Tap App Install</h3>
+          <p id="statusSubtext">Full standalone mobile app with zero browser controls.</p>
         </div>
       </div>
 
-      <div class="button-group">
-        <!-- 1-Tap Home Screen PWA Install -->
-        <button class="btn-primary-install" id="primaryInstallBtn">
-          <span class="btn-icon">⚡</span>
-          <span id="primaryInstallText">Install Nexa on This Device</span>
-        </button>
-
-        <!-- Direct Native Android APK Download -->
+      <div class="button-group single-button-group">
+        <!-- Direct 1-Tap Instant Download & Install -->
         <a href="https://github.com/SFWebSolution/nexa-andriod/releases/download/latest/Nexa-Messenger.apk" 
-           class="btn-apk-download" 
-           id="downloadApkBtn"
-           target="_blank"
-           rel="noopener noreferrer">
-          <span class="btn-icon">🤖</span>
-          <span>Download Android APK (.apk)</span>
+           class="btn-primary-install" 
+           id="primaryInstallBtn"
+           download="Nexa-Messenger.apk">
+          <span class="btn-icon">⚡</span>
+          <span id="primaryInstallText">Download & Install Nexa App</span>
         </a>
-
-        <!-- Open Web App Fullscreen -->
-        <button class="btn-secondary-launch" id="directLaunchBtn">
-          <span class="btn-icon">🚀</span>
-          <span>Open Fullscreen Web App</span>
-        </button>
       </div>
 
       <div class="install-note">
-        <span>🔒 100% Standalone App • Zero Browser Controls • Real-Time Voice & Chat</span>
+        <span>🔒 Direct Safe Download • 100% Native Mobile App • Ultra-Fast</span>
       </div>
     </main>
 
-    <!-- How It Works Section -->
-    <section>
-      <h2 class="section-title">How It Works</h2>
-      <div class="options-grid">
-        
-        <!-- Step 1 -->
-        <div class="option-card">
-          <div class="option-header">
-            <div class="option-icon-box" style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(99, 102, 241, 0.15); border-radius: 12px;">
-              <span>1️⃣</span>
-            </div>
-            <div>
-              <h3 class="option-title">Tap Install</h3>
-              <span class="option-subtitle">Home Screen or APK</span>
-            </div>
-          </div>
-          <p class="option-desc">
-            Tap the install button above to add the web app to your home screen or download the direct APK.
-          </p>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="option-card">
-          <div class="option-header">
-            <div class="option-icon-box" style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(6, 182, 212, 0.15); border-radius: 12px;">
-              <span>2️⃣</span>
-            </div>
-            <div>
-              <h3 class="option-title">Confirm on Device</h3>
-              <span class="option-subtitle">Zero Setup</span>
-            </div>
-          </div>
-          <p class="option-desc">
-            Select <strong>Install</strong> or <strong>Add to Home Screen</strong> when prompted.
-          </p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="option-card">
-          <div class="option-header">
-            <div class="option-icon-box" style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(16, 185, 129, 0.15); border-radius: 12px;">
-              <span>3️⃣</span>
-            </div>
-            <div>
-              <h3 class="option-title">Launch Standalone</h3>
-              <span class="option-subtitle">No Browser Bar</span>
-            </div>
-          </div>
-          <p class="option-desc">
-            Open Nexa directly from your Home Screen with a pure fullscreen native interface.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
     <!-- Nexa Features Grid -->
     <section class="features-section">
-      <h2 class="section-title">Why Nexa App is Faster</h2>
+      <h2 class="section-title">Why Nexa App is Better</h2>
       <div class="features-grid">
 
         <div class="feature-item">
@@ -258,24 +153,6 @@
       <p><a href="https://nexa-qydr.onrender.com" target="_blank" style="color: var(--primary-cyan); text-decoration: none;">nexa-qydr.onrender.com</a></p>
     </footer>
 
-  </div>
-
-  <!-- iOS & Fallback Manual Guide Modal -->
-  <div class="web-app-frame-modal" id="installGuideModal" style="align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #0f172a; border: 1px solid var(--primary-cyan); border-radius: var(--radius-lg); padding: 28px; max-width: 460px; width: 100%; text-align: left; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 id="guideModalTitle" style="font-size: 1.2rem; font-weight: 700; color: #fff;">📱 1-Tap Installation</h3>
-        <button class="btn-close-frame" id="closeGuideBtn" style="padding: 4px 10px;">✕</button>
-      </div>
-      
-      <div id="guideModalContent" style="font-size: 0.9rem; color: var(--text-main); line-height: 1.8;">
-        <!-- Dynamically injected based on device -->
-      </div>
-      
-      <button class="btn-primary-install" id="guideActionBtn" style="margin-top: 18px; margin-bottom: 0; font-size: 1rem; padding: 12px;">
-        🚀 Open Nexa Messenger
-      </button>
-    </div>
   </div>
 
   <!-- JavaScript -->

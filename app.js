@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   registerServiceWorker();
   bindUIEvents();
   prewarmAppServer();
-  // Keep pre-warming periodically in background
   setInterval(prewarmAppServer, 45000);
 });
 
@@ -38,11 +37,12 @@ function initDeviceDetection() {
   userDevice.isDesktop = !userDevice.isAndroid && !userDevice.isIOS;
   userDevice.isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
                             window.matchMedia('(display-mode: fullscreen)').matches ||
+                            window.matchMedia('(display-mode: minimal-ui)').matches ||
                             window.navigator.standalone === true || 
-                            window.location.search.includes('source=pwa') ||
-                            window.location.search.includes('mode=standalone');
+                            window.location.search.includes('mode=standalone') ||
+                            window.location.search.includes('source=pwa');
 
-  // If launched in standalone / installed app mode, launch native fullscreen frame
+  // If launched in standalone / installed app mode, launch native fullscreen frame immediately
   if (userDevice.isStandalone) {
     launchStandaloneApp();
     return;
@@ -64,13 +64,15 @@ function initDeviceDetection() {
   updateUIForDetectedDevice();
 }
 
-// 2. Launch Standalone Native Fullscreen App (No Browser Bar)
+// 2. Launch Standalone Native Fullscreen App (Zero Browser Bar)
 function launchStandaloneApp() {
   document.documentElement.classList.add('is-standalone-app');
   const frameContainer = document.getElementById('appFrameContainer');
   const iframe = document.getElementById('nexaAppFrame');
   const splash = document.getElementById('standaloneSplash');
+  const mainLanding = document.getElementById('mainLandingContainer');
 
+  if (mainLanding) mainLanding.style.display = 'none';
   if (frameContainer) frameContainer.style.display = 'block';
   
   if (iframe) {
@@ -105,6 +107,7 @@ function updateUIForDetectedDevice() {
   const primaryBtnText = document.getElementById('primaryInstallText');
   const statusHeading = document.getElementById('statusHeading');
   const statusSubtext = document.getElementById('statusSubtext');
+  const downloadApkBtn = document.getElementById('downloadApkBtn');
 
   if (userDevice.isStandalone) {
     launchStandaloneApp();
@@ -113,19 +116,21 @@ function updateUIForDetectedDevice() {
 
   if (userDevice.isAndroid) {
     if (badgeText) badgeText.innerText = 'Android Phone 🤖';
-    if (statusHeading) statusHeading.innerText = 'Install on Android Phone';
-    if (statusSubtext) statusSubtext.innerText = '1-Tap automatic installation directly to your Home Screen.';
-    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa App (Android)';
+    if (statusHeading) statusHeading.innerText = 'Install on Android';
+    if (statusSubtext) statusSubtext.innerText = '1-Tap install to Home Screen or download native APK.';
+    if (primaryBtnText) primaryBtnText.innerText = '⚡ Add to Home Screen (Web App)';
+    if (downloadApkBtn) downloadApkBtn.style.display = 'inline-flex';
   } else if (userDevice.isIOS) {
     if (badgeText) badgeText.innerText = 'iPhone / iPad 🍎';
     if (statusHeading) statusHeading.innerText = 'Install on iPhone / iPad';
-    if (statusSubtext) statusSubtext.innerText = 'Add Nexa directly to your Home Screen for instant native launch.';
-    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa App (iPhone)';
+    if (statusSubtext) statusSubtext.innerText = 'Add Nexa directly to your Home Screen for instant launch.';
+    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install on iPhone';
+    if (downloadApkBtn) downloadApkBtn.style.display = 'none';
   } else {
     if (badgeText) badgeText.innerText = 'Desktop / PC 💻';
     if (statusHeading) statusHeading.innerText = 'Install on Computer';
-    if (statusSubtext) statusSubtext.innerText = 'Install Nexa as a standalone desktop app.';
-    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa Desktop App';
+    if (statusSubtext) statusSubtext.innerText = 'Install Nexa as a standalone desktop application.';
+    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Desktop App';
   }
 }
 
@@ -178,7 +183,8 @@ function bindUIEvents() {
 
   if (closeGuideBtn) {
     closeGuideBtn.addEventListener('click', () => {
-      document.getElementById('installGuideModal').classList.remove('active');
+      const modal = document.getElementById('installGuideModal');
+      if (modal) modal.classList.remove('active');
     });
   }
 
@@ -224,7 +230,7 @@ function handlePrimaryInstallClick() {
   showGeneralInstallGuide();
 }
 
-// 7. iOS Guide Modal
+// iOS Guide Modal
 function showIOSInstallGuide() {
   const modal = document.getElementById('installGuideModal');
   const title = document.getElementById('guideModalTitle');
@@ -240,7 +246,7 @@ function showIOSInstallGuide() {
         <li>Tap <strong>"Add"</strong> at the top right.</li>
       </ol>
       <p style="margin-top: 14px; color: #a5b4fc; font-size: 0.85rem;">
-        ✨ Nexa will appear instantly on your iPhone Home Screen with native app speed!
+        ✨ Nexa will appear instantly on your iPhone Home Screen with zero browser controls!
       </p>
     `;
   }
@@ -248,7 +254,7 @@ function showIOSInstallGuide() {
   if (modal) modal.classList.add('active');
 }
 
-// 8. Android Guide Modal (if native prompt is bypassed)
+// Android Guide Modal
 function showAndroidInstallGuide() {
   const modal = document.getElementById('installGuideModal');
   const title = document.getElementById('guideModalTitle');
@@ -257,14 +263,14 @@ function showAndroidInstallGuide() {
   if (title) title.innerText = '🤖 Install on Android';
   if (content) {
     content.innerHTML = `
-      <p style="margin-bottom: 12px;">Complete 1-Tap installation on your phone:</p>
+      <p style="margin-bottom: 12px;">To install Nexa without browser bars:</p>
       <ol style="margin-left: 20px; line-height: 2;">
-        <li>Tap your browser's menu (<strong>⋮</strong> three dots at the top right).</li>
-        <li>Select <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
-        <li>Tap <strong>"Install"</strong>.</li>
+        <li>Tap the <strong>menu icon</strong> ( <strong>⋮</strong> 3 vertical dots ) at the top right of Chrome.</li>
+        <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
+        <li>Tap <strong>Install</strong>.</li>
       </ol>
       <p style="margin-top: 14px; color: #a5b4fc; font-size: 0.85rem;">
-        ⚡ Android will automatically install Nexa into your Home Screen and App Drawer with zero parse errors!
+        💡 Or use the <strong>Download Android APK</strong> button on the main page for the direct native app!
       </p>
     `;
   }
@@ -272,58 +278,41 @@ function showAndroidInstallGuide() {
   if (modal) modal.classList.add('active');
 }
 
-// 9. General Guide Modal
+// General Desktop Guide Modal
 function showGeneralInstallGuide() {
   const modal = document.getElementById('installGuideModal');
   const title = document.getElementById('guideModalTitle');
   const content = document.getElementById('guideModalContent');
 
-  if (title) title.innerText = '💻 Install Nexa Messenger';
+  if (title) title.innerText = '💻 Install Nexa Desktop App';
   if (content) {
     content.innerHTML = `
-      <p style="margin-bottom: 12px;">Install Nexa as a standalone desktop app:</p>
+      <p style="margin-bottom: 12px;">To install on your computer:</p>
       <ol style="margin-left: 20px; line-height: 2;">
-        <li>Look at your browser's address bar at the top right.</li>
-        <li>Click the <strong>Install Icon (⊕ or 💻)</strong> in the URL bar.</li>
-        <li>Click <strong>"Install"</strong> to launch Nexa in full-speed standalone mode.</li>
+        <li>Look for the <strong>Install icon ( ⊕ or 💻 )</strong> on the right side of your browser address bar.</li>
+        <li>Click <strong>Install</strong> to add Nexa to your Applications / Desktop.</li>
       </ol>
+      <p style="margin-top: 14px; color: #a5b4fc; font-size: 0.85rem;">
+        🚀 Launches directly from your taskbar/dock as a standalone window!
+      </p>
     `;
   }
 
   if (modal) modal.classList.add('active');
 }
 
-// 10. Toast Notification Helper
+// Custom Toast notification
 function showToast(message) {
   let toast = document.getElementById('nexaToast');
   if (!toast) {
     toast = document.createElement('div');
     toast.id = 'nexaToast';
-    toast.style.cssText = `
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #ffffff;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-size: 0.88rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      z-index: 2000;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      text-align: center;
-      max-width: 90%;
-    `;
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e1b4b;color:#fff;padding:12px 24px;border-radius:9999px;font-size:0.9rem;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.5);border:1px solid #6366f1;z-index:99999;transition:opacity 0.3s ease;opacity:0;pointer-events:none;';
     document.body.appendChild(toast);
   }
   toast.innerText = message;
   toast.style.opacity = '1';
-
   setTimeout(() => {
     toast.style.opacity = '0';
-  }, 5000);
+  }, 3500);
 }
-

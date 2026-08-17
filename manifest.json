@@ -1,15 +1,16 @@
 {
   "name": "Nexa Messenger",
   "short_name": "Nexa",
-  "description": "The Next Generation of Messaging. Fast, Secure, Smart, Connected.",
-  "id": "/?source=pwa",
-  "start_url": "./?source=pwa",
+  "description": "Next generation ultra-fast messaging app. Fast, Secure, Smart, Connected.",
+  "id": "./?mode=standalone",
+  "start_url": "./?mode=standalone",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["standalone", "window-controls-overlay"],
-  "orientation": "portrait",
+  "display_override": ["fullscreen", "standalone", "minimal-ui", "window-controls-overlay"],
+  "orientation": "portrait-primary",
   "background_color": "#0b0f19",
   "theme_color": "#0b0f19",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icon-192.png",
@@ -36,5 +37,13 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["social", "communication", "utilities"]
+  "categories": ["social", "communication", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Open Nexa",
+      "short_name": "Nexa",
+      "url": "./?mode=standalone",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
 }

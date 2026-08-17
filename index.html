@@ -2,35 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Nexa Messenger | Install on Your Device</title>
-  <meta name="description" content="Install Nexa Messenger directly on your Android, iPhone, or Desktop device in 1 tap.">
+  <meta name="description" content="Install Nexa Messenger directly on your Android, iPhone, or Desktop device in 1 tap without browser address bars.">
   
   <!-- DNS Prefetch & Preconnect for Ultra-Fast Loading -->
   <link rel="preconnect" href="https://nexa-qydr.onrender.com" crossorigin>
   <link rel="dns-prefetch" href="https://nexa-qydr.onrender.com">
 
-  <!-- True Native Standalone Engine -->
+  <!-- Immediate Native Standalone Activation -->
   <script>
     (function() {
       var isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
                          window.matchMedia('(display-mode: fullscreen)').matches ||
+                         window.matchMedia('(display-mode: minimal-ui)').matches ||
                          window.navigator.standalone === true || 
-                         window.location.search.indexOf('source=pwa') !== -1 ||
-                         window.location.search.indexOf('mode=standalone') !== -1;
+                         window.location.search.indexOf('mode=standalone') !== -1 ||
+                         window.location.search.indexOf('source=pwa') !== -1;
       if (isStandalone) {
         document.documentElement.classList.add('is-standalone-app');
       }
     })();
   </script>
 
-  <!-- PWA & Mobile Icons -->
+  <!-- PWA & Mobile Web Capabilities (No Browser Bar) -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0b0f19">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-touch-fullscreen" content="yes">
   <meta name="apple-mobile-web-app-title" content="Nexa">
+  <meta name="msapplication-navbutton-color" content="#0b0f19">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
@@ -52,8 +55,8 @@
             src="about:blank" 
             data-src="https://nexa-qydr.onrender.com" 
             title="Nexa Messenger"
-            allow="camera; microphone; geolocation; clipboard-read; clipboard-write; autoplay; display-capture; fullscreen" 
-            allowfullscreen>
+            allow="camera *; microphone *; geolocation *; clipboard-read; clipboard-write; autoplay; display-capture; fullscreen; storage-access" 
+            allowfullscreen="true">
     </iframe>
   </div>
 
@@ -71,14 +74,14 @@
     <div class="splash-loader"><div class="splash-loader-bar"></div></div>
   </div>
 
-  <div class="app-container">
+  <div class="app-container" id="mainLandingContainer">
 
     <!-- Header Navigation -->
     <header class="header">
-      <a href="https://nexa-qydr.onrender.com" class="brand">
+      <div class="brand">
         <img src="icon-192.png" alt="Nexa Icon" class="logo-img">
         <span class="brand-text">NEXA</span>
-      </a>
+      </div>
       <div class="device-badge" id="deviceBadge">
         <span class="pulse-dot"></span>
         <span id="deviceBadgeText">Detecting device...</span>
@@ -94,7 +97,7 @@
         Install <span>Nexa Messenger</span>
       </h1>
       <p class="hero-subtitle">
-        Ultra-fast mobile experience. Automatically installs directly to your home screen with zero manual steps.
+        Ultra-fast messaging experience. Installs directly to your home screen with zero browser bars or download the native APK.
       </p>
     </section>
 
@@ -104,30 +107,42 @@
         <img src="icon-192.png" class="mini-status-icon" alt="Nexa Icon">
         <div class="status-info">
           <h3 id="statusHeading">Automatic 1-Tap Installation</h3>
-          <p id="statusSubtext">Ready to install directly on your device.</p>
+          <p id="statusSubtext">Ready to install directly on your device with full standalone screen.</p>
         </div>
       </div>
 
       <div class="button-group">
+        <!-- 1-Tap Home Screen PWA Install -->
         <button class="btn-primary-install" id="primaryInstallBtn">
           <span class="btn-icon">⚡</span>
           <span id="primaryInstallText">Install Nexa on This Device</span>
         </button>
 
-        <a href="https://nexa-qydr.onrender.com" class="btn-secondary-launch" id="directLaunchBtn">
-          <span class="btn-icon">🚀</span>
-          <span>Open Nexa Web App</span>
+        <!-- Direct Native Android APK Download -->
+        <a href="https://github.com/SFWebSolution/nexa-andriod/releases/download/latest/Nexa-Messenger.apk" 
+           class="btn-apk-download" 
+           id="downloadApkBtn"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="btn-icon">🤖</span>
+          <span>Download Android APK (.apk)</span>
         </a>
+
+        <!-- Open Web App Fullscreen -->
+        <button class="btn-secondary-launch" id="directLaunchBtn">
+          <span class="btn-icon">🚀</span>
+          <span>Open Fullscreen Web App</span>
+        </button>
       </div>
 
       <div class="install-note">
-        <span>🔒 1-Tap Direct Install • Native High-Speed Mobile App</span>
+        <span>🔒 100% Standalone App • Zero Browser Controls • Real-Time Voice & Chat</span>
       </div>
     </main>
 
     <!-- How It Works Section -->
     <section>
-      <h2 class="section-title">How Automatic Install Works</h2>
+      <h2 class="section-title">How It Works</h2>
       <div class="options-grid">
         
         <!-- Step 1 -->
@@ -138,11 +153,11 @@
             </div>
             <div>
               <h3 class="option-title">Tap Install</h3>
-              <span class="option-subtitle">Single Tap</span>
+              <span class="option-subtitle">Home Screen or APK</span>
             </div>
           </div>
           <p class="option-desc">
-            Tap the install button above. Your device will automatically trigger the system app installer.
+            Tap the install button above to add the web app to your home screen or download the direct APK.
           </p>
         </div>
 
@@ -154,11 +169,11 @@
             </div>
             <div>
               <h3 class="option-title">Confirm on Device</h3>
-              <span class="option-subtitle">Instant Creation</span>
+              <span class="option-subtitle">Zero Setup</span>
             </div>
           </div>
           <p class="option-desc">
-            Select <strong>Install</strong> or <strong>Add</strong> when prompted by your system. No file download required!
+            Select <strong>Install</strong> or <strong>Add to Home Screen</strong> when prompted.
           </p>
         </div>
 
@@ -169,12 +184,12 @@
               <span>3️⃣</span>
             </div>
             <div>
-              <h3 class="option-title">Launch at Full Speed</h3>
-              <span class="option-subtitle">Home Screen App</span>
+              <h3 class="option-title">Launch Standalone</h3>
+              <span class="option-subtitle">No Browser Bar</span>
             </div>
           </div>
           <p class="option-desc">
-            Open Nexa directly from your Home Screen & App Drawer with ultra-fast native launch speed.
+            Open Nexa directly from your Home Screen with a pure fullscreen native interface.
           </p>
         </div>
 
@@ -183,7 +198,7 @@
 
     <!-- Nexa Features Grid -->
     <section class="features-section">
-      <h2 class="section-title">Why Nexa Mobile App is Faster</h2>
+      <h2 class="section-title">Why Nexa App is Faster</h2>
       <div class="features-grid">
 
         <div class="feature-item">

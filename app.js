@@ -109,6 +109,7 @@ function bindUIEvents() {
   const webAppBtn = document.getElementById('launchWebAppBtn');
   const openFrameBtn = document.getElementById('openInFrameBtn');
   const closeFrameBtn = document.getElementById('closeFrameBtn');
+  const closeApkHelpBtn = document.getElementById('closeApkHelpBtn');
 
   if (primaryBtn) {
     primaryBtn.addEventListener('click', (e) => {
@@ -148,19 +149,35 @@ function bindUIEvents() {
       document.getElementById('webAppFrameModal').classList.remove('active');
     });
   }
+
+  if (closeApkHelpBtn) {
+    closeApkHelpBtn.addEventListener('click', () => {
+      document.getElementById('apkHelpModal').classList.remove('active');
+    });
+  }
 }
 
-// 6. Master Primary Install Action - Direct Mobile APK Download
+// 6. Master Primary Install Action
 function handlePrimaryInstallClick() {
   if (userDevice.isStandalone) {
     window.location.href = 'https://nexa-qydr.onrender.com';
     return;
   }
 
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showToast('🚀 Nexa Mobile App installation started!');
+      }
+      deferredPrompt = null;
+    });
+    return;
+  }
+
   if (userDevice.isIOS) {
     triggerIOSMobileConfigDownload();
   } else {
-    // Direct Mobile APK Download for maximum speed and native app experience
     triggerAndroidAPKDownload();
   }
 }
@@ -176,9 +193,10 @@ function triggerAndroidAPKDownload() {
   link.click();
   document.body.removeChild(link);
 
-  setTimeout(() => {
-    showToast('💡 Open "Nexa-Messenger.apk" to install on your phone!');
-  }, 2000);
+  const helpModal = document.getElementById('apkHelpModal');
+  if (helpModal) {
+    helpModal.classList.add('active');
+  }
 }
 
 // 8. Direct iOS Mobile Configuration WebClip Profile Generator (.mobileconfig)

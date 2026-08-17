@@ -319,6 +319,39 @@ h1, h2, h3, h4, .brand-title {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+}
+
+.recommended-card {
+  border: 1.5px solid var(--primary-cyan);
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);
+}
+
+.card-tag {
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  background: var(--gradient-main);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+}
+
+.btn-apk-primary {
+  background: var(--gradient-main) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+
+.btn-apk-primary:hover {
+  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+  transform: translateY(-2px);
 }
 
 .option-card:hover {

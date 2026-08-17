@@ -47,111 +47,112 @@
     </header>
 
     <!-- Hero Section with Official Nexa Icon -->
-    <section class="hero">
-      <div class="hero-icon-wrapper">
-        <img src="icon-512.png" alt="Nexa Messenger Logo" class="hero-app-icon">
+  <section class="hero">
+    <div class="hero-icon-wrapper">
+      <img src="icon-512.png" alt="Nexa Messenger Logo" class="hero-app-icon">
+    </div>
+    <h1 class="hero-title">
+      Install <span>Nexa Mobile App</span>
+    </h1>
+    <p class="hero-subtitle">
+      Experience ultra-fast native speed. Download the official Nexa Mobile APK in 1 tap.
+    </p>
+  </section>
+
+  <!-- Installer Action Card -->
+  <main class="installer-card">
+    <div class="install-status-box">
+      <img src="icon-192.png" class="mini-status-icon" alt="Nexa Icon">
+      <div class="status-info">
+        <h3 id="statusHeading">Download Nexa Mobile App (APK)</h3>
+        <p id="statusSubtext">Ultra-fast native mobile app • Instant direct package download</p>
       </div>
-      <h1 class="hero-title">
-        Install <span>Nexa Messenger</span>
-      </h1>
-      <p class="hero-subtitle">
-        Install on your device in one tap.
-      </p>
-    </section>
+    </div>
 
-    <!-- Installer Action Card -->
-    <main class="installer-card">
-      <div class="install-status-box">
-        <img src="icon-192.png" class="mini-status-icon" alt="Nexa Icon">
-        <div class="status-info">
-          <h3 id="statusHeading">Install on your device</h3>
-          <p id="statusSubtext">Tap below to install Nexa directly.</p>
-        </div>
-      </div>
+    <button class="btn-primary-install" id="primaryInstallBtn">
+      <span class="btn-icon">⚡</span>
+      <span id="primaryInstallText">Download Nexa Mobile APK</span>
+    </button>
 
-      <button class="btn-primary-install" id="primaryInstallBtn">
-        <span class="btn-icon">⚡</span>
-        <span id="primaryInstallText">Install Nexa App</span>
-      </button>
+    <div class="install-note">
+      <span>🔒 Fast native mobile app (APK) • Verified download</span>
+    </div>
+  </main>
 
-      <div class="install-note">
-        <span>🔒 Fast & verified for your device</span>
-      </div>
-    </main>
-
-    <!-- Platform Options -->
-    <section>
-      <h2 class="section-title">Choose Your Device</h2>
-      <div class="options-grid">
-        
-        <!-- Android Option -->
-        <div class="option-card">
-          <div>
-            <div class="option-header">
-              <div class="option-icon-box">
-                <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
-                <span class="os-badge">🤖</span>
-              </div>
-              <div>
-                <h3 class="option-title">Android App</h3>
-                <span class="option-subtitle">For Android Devices</span>
-              </div>
+  <!-- Platform Options -->
+  <section>
+    <h2 class="section-title">Choose Mobile App Installation</h2>
+    <div class="options-grid">
+      
+      <!-- Android Option (Recommended) -->
+      <div class="option-card recommended-card">
+        <div class="card-tag">⚡ FASTEST MOBILE APP</div>
+        <div>
+          <div class="option-header">
+            <div class="option-icon-box">
+              <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
+              <span class="os-badge">🤖</span>
             </div>
-            <p class="option-desc">
-              Download and install the Nexa app directly on your Android phone.
-            </p>
-          </div>
-          <button class="btn-secondary" id="downloadApkBtn">
-            <span>📥 Download Android APK</span>
-          </button>
-        </div>
-
-        <!-- iOS Option -->
-        <div class="option-card">
-          <div>
-            <div class="option-header">
-              <div class="option-icon-box">
-                <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
-                <span class="os-badge">🍎</span>
-              </div>
-              <div>
-                <h3 class="option-title">iPhone & iPad</h3>
-                <span class="option-subtitle">For iOS Devices</span>
-              </div>
+            <div>
+              <h3 class="option-title">Android Mobile App (APK)</h3>
+              <span class="option-subtitle">Direct APK Download • Ultra Fast</span>
             </div>
-            <p class="option-desc">
-              Add Nexa directly to your iPhone Home Screen in 1 tap.
-            </p>
           </div>
-          <button class="btn-secondary" id="installIosBtn">
-            <span>📱 Install on iPhone</span>
-          </button>
+          <p class="option-desc">
+            Download the native Nexa APK package for Android. Runs significantly faster than browser apps with zero load delay.
+          </p>
         </div>
-
-        <!-- Web App Standalone Option -->
-        <div class="option-card">
-          <div>
-            <div class="option-header">
-              <div class="option-icon-box">
-                <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
-                <span class="os-badge">💻</span>
-              </div>
-              <div>
-                <h3 class="option-title">Web Application</h3>
-                <span class="option-subtitle">All Browsers & PC</span>
-              </div>
-            </div>
-            <p class="option-desc">
-              Open Nexa immediately in your browser in full app view.
-            </p>
-          </div>
-          <button class="btn-secondary" id="openInFrameBtn">
-            <span>🌐 Open Web App</span>
-          </button>
-        </div>
-
+        <button class="btn-secondary btn-apk-primary" id="downloadApkBtn">
+          <span>📥 Download Nexa Mobile APK</span>
+        </button>
       </div>
-    </section>
+
+      <!-- iOS Option -->
+      <div class="option-card">
+        <div>
+          <div class="option-header">
+            <div class="option-icon-box">
+              <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
+              <span class="os-badge">🍎</span>
+            </div>
+            <div>
+              <h3 class="option-title">iPhone & iPad Mobile App</h3>
+              <span class="option-subtitle">For iOS Devices</span>
+            </div>
+          </div>
+          <p class="option-desc">
+            Install Nexa Mobile App profile directly on your iPhone Home Screen for high-speed mobile access.
+          </p>
+        </div>
+        <button class="btn-secondary" id="installIosBtn">
+          <span>📱 Install iPhone Mobile App</span>
+        </button>
+      </div>
+
+      <!-- Web App Fallback Option -->
+      <div class="option-card">
+        <div>
+          <div class="option-header">
+            <div class="option-icon-box">
+              <img src="icon-192.png" alt="Nexa Icon" class="card-nexa-icon">
+              <span class="os-badge">💻</span>
+            </div>
+            <div>
+              <h3 class="option-title">Browser Version (Fallback)</h3>
+              <span class="option-subtitle">Web Browser Access</span>
+            </div>
+          </div>
+          <p class="option-desc">
+            Open Nexa in browser. (Mobile APK app recommended for maximum speed and features).
+          </p>
+        </div>
+        <button class="btn-secondary" id="openInFrameBtn">
+          <span>🌐 Open Web Version</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
 
     <!-- Nexa Features Grid -->
     <section class="features-section">

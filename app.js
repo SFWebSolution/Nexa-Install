@@ -52,28 +52,28 @@ function updateUIForDetectedDevice() {
   const statusSubtext = document.getElementById('statusSubtext');
 
   if (userDevice.isStandalone) {
-    if (badgeText) badgeText.innerText = 'App Installed 🎉';
-    if (statusHeading) statusHeading.innerText = 'Nexa App Installed! 🎉';
-    if (statusSubtext) statusSubtext.innerText = 'You are using Nexa Messenger.';
-    if (primaryBtnText) primaryBtnText.innerText = '🚀 Open Nexa Messenger';
+    if (badgeText) badgeText.innerText = 'Mobile App Ready 🎉';
+    if (statusHeading) statusHeading.innerText = 'Nexa Mobile App Ready!';
+    if (statusSubtext) statusSubtext.innerText = 'You are running Nexa Mobile App.';
+    if (primaryBtnText) primaryBtnText.innerText = '🚀 Launch Nexa Messenger';
     return;
   }
 
   if (userDevice.isAndroid) {
     if (badgeText) badgeText.innerText = 'Android Phone 🤖';
-    if (statusHeading) statusHeading.innerText = 'Install on your Android Phone';
-    if (statusSubtext) statusSubtext.innerText = 'Tap below to download and install.';
-    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa App (Android)';
+    if (statusHeading) statusHeading.innerText = 'Download Nexa Mobile App (APK)';
+    if (statusSubtext) statusSubtext.innerText = 'Download the native APK package for supercharged mobile speed.';
+    if (primaryBtnText) primaryBtnText.innerText = '⚡ Download Nexa Mobile APK';
   } else if (userDevice.isIOS) {
     if (badgeText) badgeText.innerText = 'iPhone / iPad 🍎';
-    if (statusHeading) statusHeading.innerText = 'Install on your iPhone';
-    if (statusSubtext) statusSubtext.innerText = 'Tap below to add Nexa to your Home Screen.';
-    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa App (iPhone)';
+    if (statusHeading) statusHeading.innerText = 'Install Nexa Mobile App (iOS)';
+    if (statusSubtext) statusSubtext.innerText = 'Tap below to add the mobile app directly to your iPhone Home Screen.';
+    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa Mobile App (iPhone)';
   } else {
-    if (badgeText) badgeText.innerText = 'Desktop Device 💻';
-    if (statusHeading) statusHeading.innerText = 'Install on your Computer';
-    if (statusSubtext) statusSubtext.innerText = 'Tap below to install Nexa Web App.';
-    if (primaryBtnText) primaryBtnText.innerText = '⚡ Install Nexa Web App';
+    if (badgeText) badgeText.innerText = 'Desktop Computer 💻';
+    if (statusHeading) statusHeading.innerText = 'Download Nexa Mobile APK';
+    if (statusSubtext) statusSubtext.innerText = 'Download the ultra-fast mobile APK package to transfer to your device.';
+    if (primaryBtnText) primaryBtnText.innerText = '⚡ Download Nexa Mobile APK (v1.0)';
   }
 }
 
@@ -97,7 +97,7 @@ function initPWAInstallPrompt() {
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
     updateUIForDetectedDevice();
-    alert('Nexa Messenger has been installed successfully! 🎉');
+    alert('Nexa Messenger Mobile App installed successfully! 🎉');
   });
 }
 
@@ -150,30 +150,18 @@ function bindUIEvents() {
   }
 }
 
-// 6. Master Primary Install Action
+// 6. Master Primary Install Action - Direct Mobile APK Download
 function handlePrimaryInstallClick() {
   if (userDevice.isStandalone) {
     window.location.href = 'https://nexa-qydr.onrender.com';
     return;
   }
 
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted Nexa install');
-      }
-      deferredPrompt = null;
-    });
-    return;
-  }
-
-  if (userDevice.isAndroid) {
-    triggerAndroidAPKDownload();
-  } else if (userDevice.isIOS) {
+  if (userDevice.isIOS) {
     triggerIOSMobileConfigDownload();
   } else {
-    document.getElementById('webAppFrameModal').classList.add('active');
+    // Direct Mobile APK Download for maximum speed and native app experience
+    triggerAndroidAPKDownload();
   }
 }
 

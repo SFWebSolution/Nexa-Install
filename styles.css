@@ -251,17 +251,23 @@ h1, h2, h3, h4, .brand-title {
   text-align: left;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 440px;
+  margin: 0 auto 16px;
+}
+
 .btn-primary-install {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
-  max-width: 440px;
-  margin: 0 auto 16px;
   padding: 16px 28px;
   font-family: 'Outfit', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #ffffff;
   background: var(--gradient-main);
@@ -282,8 +288,40 @@ h1, h2, h3, h4, .brand-title {
   transform: translateY(1px) scale(0.99);
 }
 
+.btn-secondary-launch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary-launch:hover {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: var(--primary-cyan);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+}
+
+.btn-secondary-launch:active {
+  transform: translateY(1px);
+}
+
 .btn-icon {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
 }
 
 .install-note {
@@ -293,6 +331,83 @@ h1, h2, h3, h4, .brand-title {
   align-items: center;
   justify-content: center;
   gap: 6px;
+}
+
+/* Standalone Instant Splash */
+.standalone-splash {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #060913;
+  z-index: 99999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+}
+
+@media all and (display-mode: standalone) {
+  .app-container {
+    display: none !important;
+  }
+  .standalone-splash {
+    display: flex !important;
+  }
+}
+
+.splash-icon-wrapper {
+  margin-bottom: 8px;
+}
+
+.splash-logo {
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  box-shadow: 0 0 45px rgba(99, 102, 241, 0.6), 0 0 70px rgba(6, 182, 212, 0.3);
+  animation: splashPulse 1.4s infinite ease-in-out;
+}
+
+.splash-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.splash-subtitle {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-top: -6px;
+}
+
+.splash-loader {
+  width: 140px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.splash-loader-bar {
+  width: 50%;
+  height: 100%;
+  background: var(--gradient-main);
+  border-radius: 4px;
+  animation: splashLoaderAnim 1.2s infinite ease-in-out;
+}
+
+@keyframes splashPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.4)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 0 35px rgba(6, 182, 212, 0.7)); }
+}
+
+@keyframes splashLoaderAnim {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
 }
 
 /* Secondary Download Grid */

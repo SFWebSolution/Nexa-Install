@@ -6,6 +6,24 @@
   <title>Nexa Messenger | Install on Your Device</title>
   <meta name="description" content="Install Nexa Messenger directly on your Android, iPhone, or Desktop device in 1 tap.">
   
+  <!-- DNS Prefetch & Preconnect for Ultra-Fast Loading -->
+  <link rel="preconnect" href="https://nexa-qydr.onrender.com" crossorigin>
+  <link rel="dns-prefetch" href="https://nexa-qydr.onrender.com">
+
+  <!-- Instant Standalone App Launch Engine -->
+  <script>
+    (function() {
+      var isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                         window.navigator.standalone === true || 
+                         window.location.search.indexOf('source=pwa') !== -1 ||
+                         window.location.search.indexOf('mode=standalone') !== -1;
+      if (isStandalone) {
+        // Instantly launch straight into Nexa Messenger with zero delay
+        window.location.replace('https://nexa-qydr.onrender.com');
+      }
+    })();
+  </script>
+
   <!-- PWA & Mobile Icons -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0b0f19">
@@ -32,11 +50,21 @@
   <div class="ambient-blur-1"></div>
   <div class="ambient-blur-2"></div>
 
+  <!-- Standalone Instant Splash for Launching -->
+  <div id="standaloneSplash" class="standalone-splash">
+    <div class="splash-icon-wrapper">
+      <img src="icon-512.png" alt="Nexa Messenger" class="splash-logo">
+    </div>
+    <div class="splash-title">Launching Nexa...</div>
+    <div class="splash-subtitle">Ultra-Fast Native Messenger</div>
+    <div class="splash-loader"><div class="splash-loader-bar"></div></div>
+  </div>
+
   <div class="app-container">
 
     <!-- Header Navigation -->
     <header class="header">
-      <a href="https://nexa-qydr.onrender.com" class="brand" target="_blank" rel="noopener">
+      <a href="https://nexa-qydr.onrender.com" class="brand">
         <img src="icon-192.png" alt="Nexa Icon" class="logo-img">
         <span class="brand-text">NEXA</span>
       </a>
@@ -69,10 +97,17 @@
         </div>
       </div>
 
-      <button class="btn-primary-install" id="primaryInstallBtn">
-        <span class="btn-icon">⚡</span>
-        <span id="primaryInstallText">Install Nexa on This Device</span>
-      </button>
+      <div class="button-group">
+        <button class="btn-primary-install" id="primaryInstallBtn">
+          <span class="btn-icon">⚡</span>
+          <span id="primaryInstallText">Install Nexa on This Device</span>
+        </button>
+
+        <a href="https://nexa-qydr.onrender.com" class="btn-secondary-launch" id="directLaunchBtn">
+          <span class="btn-icon">🚀</span>
+          <span>Open Nexa Web App</span>
+        </a>
+      </div>
 
       <div class="install-note">
         <span>🔒 1-Tap Direct Install • Native High-Speed Mobile App</span>

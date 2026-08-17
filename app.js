@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Nexa Messenger - Universal 1-Tap Automatic Mobile Installer Engine
-   ========================================================================== */
+const NEXA_LIVE_URL = 'https://nexa-qydr.onrender.com';
 
 let deferredPrompt = null;
 let userDevice = {
@@ -11,12 +9,25 @@ let userDevice = {
   browserName: 'Unknown'
 };
 
+// Immediate pre-warm on execution
+prewarmAppServer();
+
 document.addEventListener('DOMContentLoaded', () => {
   initDeviceDetection();
   initPWAInstallPrompt();
   registerServiceWorker();
   bindUIEvents();
+  prewarmAppServer();
+  // Keep pre-warming periodically in background
+  setInterval(prewarmAppServer, 45000);
 });
+
+// Pre-warm the live server so cold starts are eliminated
+function prewarmAppServer() {
+  try {
+    fetch(NEXA_LIVE_URL, { mode: 'no-cors', cache: 'no-cache' }).catch(() => {});
+  } catch (e) {}
+}
 
 // 1. Device & OS Auto-Detection
 function initDeviceDetection() {
@@ -25,7 +36,16 @@ function initDeviceDetection() {
   userDevice.isAndroid = /android/i.test(ua);
   userDevice.isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
   userDevice.isDesktop = !userDevice.isAndroid && !userDevice.isIOS;
-  userDevice.isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  userDevice.isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                            window.navigator.standalone === true ||
+                            window.location.search.includes('source=pwa') ||
+                            window.location.search.includes('mode=standalone');
+
+  // If launched in standalone / installed app mode, instantly navigate to the app
+  if (userDevice.isStandalone) {
+    window.location.replace(NEXA_LIVE_URL);
+    return;
+  }
 
   // Browser type
   if (/chrome|crios/i.test(ua) && !/edg/i.test(ua)) {
@@ -51,10 +71,7 @@ function updateUIForDetectedDevice() {
   const statusSubtext = document.getElementById('statusSubtext');
 
   if (userDevice.isStandalone) {
-    if (badgeText) badgeText.innerText = 'App Ready 🎉';
-    if (statusHeading) statusHeading.innerText = 'Nexa App Installed! 🎉';
-    if (statusSubtext) statusSubtext.innerText = 'Nexa is installed and running at full speed.';
-    if (primaryBtnText) primaryBtnText.innerText = '🚀 Launch Nexa Messenger';
+    window.location.replace(NEXA_LIVE_URL);
     return;
   }
 
